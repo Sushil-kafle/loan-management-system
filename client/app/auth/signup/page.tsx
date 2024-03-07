@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
+import { useRouter } from "next/navigation";
+
 export const metadata: Metadata = {
   title: "Signup - Loan App",
   description: "This is Signup page for Mini Loan App",
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 
 const SignUp: React.FC = () => {
   const [err, setErr] = useState("");
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -138,7 +141,7 @@ const SignUp: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           console.log("Registration successful:", data.message);
-
+          router.push("/auth/signin");
           // Clear the form fields
           setFormData({
             username: "",
